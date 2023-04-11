@@ -47,9 +47,6 @@ namespace Richard_Pizzaria_UML2
             }
             return null;
         }
-        //string searchCriteria
-
-
 
         public void Update(Pizza pizza)
         {

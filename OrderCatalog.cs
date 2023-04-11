@@ -42,17 +42,19 @@ namespace Richard_Pizzaria_UML2
 
         }
 
-        //public void UpdateOrder(Order order, Customer customer, Pizza pizza)
-        //{
-        //    foreach (var o in _order)
-        //    {
-        //        if (o.orderId == order.orderId)
-        //        {
-        //            o.customerName = Order.customerName;
-        //            o.customerId = customer.customerId;
-        //        }
-        //    }
-        //}
+        public void UpdateOrder(Order order)
+        {
+            foreach (var o in _order)
+            {
+                if (o.orderId == order.orderId)
+                {
+                    o.name = order.name;
+                    o.orderId = order.orderId;
+                    o.pizza = order.pizza;
+                    o.price = order.price;                  
+                }
+            }
+        }
 
 
     }

@@ -9,22 +9,25 @@ namespace Richard_Pizzaria_UML2
     public class Order
     {
         public int _orderId;
-        public Customer _customer;
-        public Pizza _pizza;
+        public string _name;
+        public string _pizza;
         public double _totalPrice;
+        public int _price;
 
         public Order()
         {
             _orderId = orderId;
-            _customer = customer;
+            _name = name;
             _pizza = pizza;
+            _price = price;
             _totalPrice = totalPrice;
         }
 
         public int orderId { get; set; }
-        public Customer customer { get; set; }
-        public Pizza pizza { get; set; }
+        public string name { get; set; }
+        public string pizza { get; set; }
         public double totalPrice { get; set; }
+        public int price { get; set; }
 
         public double Tax = 1.20;
         public int Delivery = 35;
@@ -35,14 +38,11 @@ namespace Richard_Pizzaria_UML2
             return 
                 
                 $" - Ordre nr: {orderId}\n" +
-                $" - Customer: {customer}\n" +
+                $" - Customer: {name}\n" +
                 $" - Pizza: {pizza}" +
-                $" Total price: {totalPrice}";
+                $" Total price: {price*2}";
         }
 
-        public void CalculateTotalPrice()
-        {
-            totalPrice = (pizza.pizzaPrice * Tax) + Delivery;
-        }
+        
     }
 }

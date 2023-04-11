@@ -1,5 +1,6 @@
 ﻿using Richard_Pizzaria_UML2;
 using System;
+using System.Data;
 
 namespace Richard_Pizzaria_UML2
 {
@@ -7,11 +8,13 @@ namespace Richard_Pizzaria_UML2
     {
         MenuCatalog menuCatalog;
         CustomerCatalog customerCatalog;
+        OrderCatalog orderCatalog;
 
         public Store()
         {
             menuCatalog = new MenuCatalog();
             customerCatalog = new CustomerCatalog();
+            orderCatalog = new OrderCatalog();
             Menu();
             Run();
         }
@@ -31,73 +34,17 @@ namespace Richard_Pizzaria_UML2
             c = new Customer() { customerId = 3, customerName = "Abraham sofus", customerAge = 35, customerPhone = 15677721 };
             customerCatalog.Create(c);
 
-
-            //Order o = new Order() { orderId = 1, customerName = "Dorte Brønd", };
-            //Console.WriteLine();
-            //int pizzaToBeFound = 2;
-            //Console.WriteLine($"Finding Pizza {pizzaToBeFound}");
-            //Pizza foundPizza = menuCatalog.Read(pizzaToBeFound);
-            //Console.WriteLine(foundPizza);
-
-            //Console.WriteLine();
-            //string searchCriteria = "Skinke";
-            //Console.WriteLine($"Finding Pizza: {searchCriteria}");
-            //foundPizza = menuCatalog.SearchPizza(searchCriteria);
-            //Console.WriteLine(foundPizza);
-
-            //Console.WriteLine();
-            //Console.WriteLine($"Updating Pizza #{foundPizza.pizzaId}");
-            //foundPizza.pizzaName += " (Updated)";
-            //menuCatalog.Update(foundPizza);
-
-            //Console.WriteLine();
-            //menuCatalog.PrintMenu();
-
-            //Console.WriteLine();
-            //int pizzaToBeDeleted = 0;
-            //Console.WriteLine($"Deleting pizza#: {pizzaToBeDeleted}");
-            //menuCatalog.Delete(pizzaToBeDeleted);
-            //Console.WriteLine();
-
-            //menuCatalog.PrintMenu();
-
-
-
-            //Console.WriteLine("");
-            //Console.WriteLine("Vælg en pizza 1-3: ");
-            //int pizzaToBeFound = Convert.ToInt32(Console.ReadLine());
-            //Console.WriteLine($"Finding Pizza {pizzaToBeFound}...");
-            //Console.WriteLine();
-            //Pizza foundPizza = menuCatalog.Read(pizzaToBeFound);
-            //Console.WriteLine(foundPizza);
-
-            //Console.WriteLine("");
-            //Console.WriteLine("Søg efter pizza navn: ");
-            //string searchCriteria = Convert.ToString(Console.ReadLine());
-            //Console.WriteLine($"Finding Pizza starting with: {searchCriteria}");
-            //foundPizza = menuCatalog.SearchPizza(searchCriteria);
-            //Console.WriteLine(foundPizza);
-
-            //Console.WriteLine();
-            //Console.WriteLine($"Updating Pizza #{foundPizza.Number}");
-            //foundPizza.pizzaname += " (Updated)";
-            //menuCatalog.Update(foundPizza);
-
-            //Console.WriteLine();
-            //menuCatalog.PrintMenu();
-
-            //Console.WriteLine("Indtast Hvilket nummer 1-3 af pizza der skal slettes: ");
-            //int pizzaToBeDeleted = Convert.ToInt32(Console.ReadLine());
-            //Console.WriteLine($"Deleting pizza#: {pizzaToBeDeleted}");
-            //menuCatalog.Delete(pizzaToBeDeleted);
-            //Console.WriteLine($"Pizza {pizzaToBeDeleted} is deleted.");
-
-            //menuCatalog.PrintMenu();
+            Order o = new Order() { orderId = 1, name = "Hans Hansen", pizza = "Hawaii", price = 70};
+            orderCatalog.Create(o);
+            o = new Order() { orderId = 2, name = "Eva Jørgensen", pizza = "Ananas og skinke", price = 69 };
+            orderCatalog.Create(o);
+            o = new Order() { orderId = 3, name = "Momo Harun", pizza = "Kebab", price = 42 };
+            orderCatalog.Create(o);
 
         }
         public void Run()
         {
-            new UserDialog(menuCatalog, customerCatalog).Run();
+            new UserDialog(menuCatalog, customerCatalog, orderCatalog).Run();
             //new UserDialog(customerCatalog).Run();
         }
     }

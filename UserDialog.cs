@@ -11,10 +11,12 @@ namespace Richard_Pizzaria_UML2
     {
         MenuCatalog MenuCatalog;
         CustomerCatalog CustomerCatalog;
-        public UserDialog(MenuCatalog menuCatalog, CustomerCatalog customerCatalog)
+        OrderCatalog OrderCatalog;
+        public UserDialog(MenuCatalog menuCatalog, CustomerCatalog customerCatalog, OrderCatalog orderCatalog)
         {
             MenuCatalog = menuCatalog;
             CustomerCatalog = customerCatalog;
+            OrderCatalog = orderCatalog;
         }
 
         Pizza PrintPizza()
@@ -33,6 +35,16 @@ namespace Richard_Pizzaria_UML2
             Console.WriteLine("|    Customer List    |");
             Console.WriteLine("-----------------------");
             CustomerCatalog.CustomerPrint();
+            return null;
+        }
+
+        Order OrderPrint()
+        {
+            Console.Clear();
+            Console.WriteLine("-----------------------");
+            Console.WriteLine("|     Order List      |");
+            Console.WriteLine("-----------------------");
+            OrderCatalog.OrderPrint();
             return null;
         }
 
@@ -88,6 +100,31 @@ namespace Richard_Pizzaria_UML2
             return customerItem;
         }
 
+        Order SearchOrder()
+        {
+            Order orderItem = new Order();
+            Console.Clear();
+            Console.WriteLine("-----------------------");
+            Console.WriteLine("|    Search Orders    |");
+            Console.WriteLine("-----------------------");
+            Console.WriteLine();
+
+            Console.Write("Search Orders by Id number: ");
+            string input = "";
+            try
+            {
+                input = Console.ReadLine();
+                orderItem.orderId = Int32.Parse(input);
+
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine($"Unable to parse 'input' - Message: {e.Message}");
+                throw;
+            }
+            return orderItem;
+        }
+
         Pizza UpdatePizza()
             {
             Pizza pizzaItem = new Pizza();
@@ -127,6 +164,47 @@ namespace Richard_Pizzaria_UML2
                 throw;
             }
             return pizzaItem;
+        }
+
+        Order UpdateOrder()
+        {
+            Order orderItem = new Order();
+            Console.Clear();
+            Console.WriteLine("-----------------------");
+            Console.WriteLine("|    Update Order     |");
+            Console.WriteLine("-----------------------");
+            Console.WriteLine();
+            OrderCatalog.OrderPrint();
+
+            Console.Write("Enter number you want to update: ");
+            orderItem.orderId = Int32.Parse(Console.ReadLine());
+
+            string input = "";
+            Console.Write("Enter new name: ");
+            try
+            {
+                input = Console.ReadLine();
+                orderItem.name = input;
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine($"Unable to parse '{input}' - Message: {e.Message}");
+                throw;
+            }
+
+            input = "";
+            Console.Write("Enter new price: ");
+            try
+            {
+                input = Console.ReadLine();
+                orderItem.price = Int32.Parse(input);
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine($"Unable to parse '{input}' - Message: {e.Message}");
+                throw;
+            }
+            return orderItem;
         }
         Customer UpdateCustomer()
         {
@@ -298,13 +376,12 @@ namespace Richard_Pizzaria_UML2
             Console.Write("Enter the Id of the order: ");
             orderItem.orderId = Int32.Parse(Console.ReadLine());
 
-            CustomerCatalog.CustomerPrint();
             string input = "";
-            Console.Write("Enter the Id of the customer: ");
+            Console.Write("Enter the name of the customer: ");
             try
             {
                 input = Console.ReadLine();
-                orderItem.customerId = Int32.Parse(input);
+                orderItem.name = input;
             }
             catch (FormatException e)
             {
@@ -312,6 +389,32 @@ namespace Richard_Pizzaria_UML2
                 throw;
             }
 
+            input = "";
+            Console.Write("Enter the name of the pizza: ");
+            try
+            {
+                input = Console.ReadLine();
+                orderItem.pizza = input;
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine($"Unable to parse '{input}' - Message: {e.Message}");
+                throw;
+            }
+
+            input = "";
+            Console.Write("Enter the price of the pizza: ");
+            try
+            {
+                input = Console.ReadLine();
+                orderItem.price = Int32.Parse(input);
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine($"Unable to parse '{input}' - Message: {e.Message}");
+                throw;
+            }
+           
             return orderItem;
         }
 
@@ -339,6 +442,32 @@ namespace Richard_Pizzaria_UML2
                 throw;
             }
             return pizzaItem;
+
+        }
+
+        Order DeleteOrder()
+        {
+            Order orderItem = new Order();
+            Console.Clear();
+            Console.WriteLine("-----------------------");
+            Console.WriteLine("|    Delete Order     |");
+            Console.WriteLine("-----------------------");
+            Console.WriteLine();
+            OrderCatalog.OrderPrint();
+
+            Console.Write("Enter number you want to delete: ");
+            string input = "";
+            try
+            {
+                input = Console.ReadLine();
+                orderItem.orderId = Int32.Parse(input);
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine($"Unable to parse '{input}' - Message: {e.Message}");
+                throw;
+            }
+            return orderItem;
 
         }
         Customer DeleteCustomer()
@@ -415,13 +544,15 @@ namespace Richard_Pizzaria_UML2
                 "7. Update Customer",
                 "8. Search Customer",
                 "9. Delete Customer",
-                "10. quit",
                 "",
                 "     - ORDER -     ",
-                "11. Make Order",
+                "10. Print Orders",
+                "11. Create Order",
                 "12. Update Order",
-                "13. Delete Order",
-                "14. See Order"
+                "13. Search Order",
+                "14. Delete Orders",
+                "",
+                "15. quit",
             };
 
             while (proceed)
@@ -508,7 +639,7 @@ namespace Richard_Pizzaria_UML2
                         }
                         catch (Exception )
                         {
-                            Console.WriteLine($"No pizza menu found");
+                            Console.WriteLine($"No customer list found");
                         }
                         Console.Write("Hit any key to continue");
                         Console.ReadKey();
@@ -570,6 +701,75 @@ namespace Richard_Pizzaria_UML2
                         
                         break;
                     case 10:
+                        try
+                        {
+                            OrderPrint();
+                            Console.Write("Hit any key to continue");
+                            Console.ReadKey();
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine($"No Order list found");
+                        }
+                        Console.Write("Hit any key to continue");
+                        Console.ReadKey();
+                        break;
+                    case 11:
+                        try
+                        {
+                            Order order = CreateNewOrder();
+                            OrderCatalog.Create(order);
+                            Console.WriteLine($"You created: {order}");
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine($"No order created");
+                        }
+                        Console.Write("Hit any key to continue");
+                        Console.ReadKey();
+                        break;
+                    case 12:
+                        try
+                        {
+                            Order order = UpdateOrder();
+                            OrderCatalog.UpdateOrder(order);
+                            Console.WriteLine($"You updated: {order}");
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine($"No order updated");
+                        }
+                        Console.Write("Hit any key to continue");
+                        Console.ReadKey();
+                        break;
+                    case 13:
+                        try
+                        {
+                            Order order = SearchOrder();
+                            OrderCatalog.SearchOrder(order);
+                            //Console.WriteLine($"We found this: {pizza}");
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine($"No order found");
+                        }
+                        Console.Write("Hit any key to continue");
+                        Console.ReadKey();
+                        break;
+                    case 14:
+                        try
+                        {
+                            Order order = DeleteOrder();
+                            OrderCatalog.UpdateOrder(order);
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine($"No order found");
+                        }
+                        Console.Write("Hit any key to continue");
+                        Console.ReadKey();
+                        break;
+                    case 15:
                         proceed = false;
                         Console.WriteLine("Quitting");
                         break;
@@ -577,6 +777,8 @@ namespace Richard_Pizzaria_UML2
                         Console.Write("Hit any key to continue");
                         Console.ReadKey();
                         break;
+
+
 
                 }
             }
