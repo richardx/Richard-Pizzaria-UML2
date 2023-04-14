@@ -55,6 +55,19 @@ namespace Richard_Pizzaria_UML2
                 }
             }
         }
+        public void DeleteOrder(Order order)
+        {
+            foreach (var o in _order)
+            {
+                if (o.orderId == order.orderId)
+                {
+                    order = o;
+                    break;
+                }
+
+            }
+            _order.Remove(order);
+        }
 
 
     }

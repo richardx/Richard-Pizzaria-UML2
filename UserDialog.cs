@@ -760,7 +760,7 @@ namespace Richard_Pizzaria_UML2
                         try
                         {
                             Order order = DeleteOrder();
-                            OrderCatalog.UpdateOrder(order);
+                            OrderCatalog.DeleteOrder(order);
                         }
                         catch (Exception)
                         {
